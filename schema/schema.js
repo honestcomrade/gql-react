@@ -1,6 +1,6 @@
 // contains all the models properties and their relations
 const graphql = require('graphql');
-const _ = require ('lodash');
+const axios = require('axios');
 
 const {
   GraphQLObjectType,
@@ -14,9 +14,19 @@ const UserType = new GraphQLObjectType({
   fields: {
     id: { type: GraphQLString },
     firstName: { type: GraphQLString },
-    age: { type: GraphQLInt }
+    age: { type: GraphQLInt },
+    companyId: { type: GraphQLString }
   }
 });
+
+const CompanyType = new GraphQLObjectType({
+  name: 'Company',
+  fields: {
+    id: { type: GraphQLString },
+    name: { type: GraphQLString },
+    description: { type: GraphQLString },
+  }
+})
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -25,7 +35,8 @@ const RootQuery = new GraphQLObjectType({
       type: UserType,
       args: { id: { type: GraphQLString } },
       resolve(parentValue, args) { // resolve funciton gets the args you passed into the query
-        return _.find(users, { id: args.id });
+        return axios.get(`http://localhost:3000/users/${args.id}`)
+          .then(resp => resp.data);
       }
     }
   }

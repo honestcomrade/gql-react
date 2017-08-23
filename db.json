@@ -1,10 +1,22 @@
 {
   "users" : [
     {
-      "id": "23", "firstName" : "Bill", "age" : 20
+      "id": "23", "firstName" : "Bill", "age" : 20, "companyId": "1"
     },
     {
-      "id": "20", "firstName" : "Lexa", "age" : 39
+      "id": "20", "firstName" : "Lexa", "age" : 39, "companyId": "2"
+    },
+    {
+      "id": "29", "firstName" : "alex", "age" : 19, "companyId": "2"
+    }
+  ],
+
+  "companies" : [
+    {
+      "id" : 1, "name" : "Apple", "description" : "iphone"
+    },
+    {
+      "id" : 2, "name" : "PhoneCo", "description" : "hagglers"
     }
   ]
 }
